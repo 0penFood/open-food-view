@@ -1,93 +1,86 @@
 <template>
 
-  <q-page>
-    <div class="q-pa-md" style="max-width: 400px">
+  <q-page class="bg-login window-height window-width row justify-center items-center">
+    <div>
 
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-gutter-md"
-      >
+      <q-card square bordered class="q-pa-lg shadow-1">
+        <div class="text-h3"> Register Restaurant</div>
+        <q-form
+          @submit="onSubmit"
+          @reset="onReset"
+          class="q-gutter-md"
+        >
 
-        <q-input
-          filled
-          v-model="name"
-          label="Name of society"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
+          <q-input
+            filled
+            v-model="name"
+            label="Name of society"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
 
-        <q-btn-dropdown
-          color="primary"
-          label="Restaurant Type"
-          filled
-          v-model="restaurantType"
-          lazy-rules>
-          <!-- dropdown content -->
-          <q-list link>
-            <q-item v-for="n in 2" :key="`1.${n}`" @click="clickTypeRestaurant()">
-              <q-item-main>
-                <q-item-tile label>Italian</q-item-tile>
-              </q-item-main>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
+          <q-input
+            filled
+            v-model="type"
+            label="Type of society"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
 
 
-        <q-input
-          filled
-          v-model="authentificationSociety"
-          label="Your SIRET"
-          hint="SIRET"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-
-        <q-input
-          filled
-          v-model="sepa"
-          label="SEPA"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-
-        <q-input
-          filled
-          v-model="adresse"
-          label="Adresse"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-
-        <q-input
-          filled
-          v-model="city"
-          label="City"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-
-        <q-btn-dropdown
-          color="primary"
-          label="Country">
-          <!-- dropdown content -->
-          <q-list link>
-            <q-item v-for="n in 2" :key="`1.${n}`" @click="clickTypeRestaurant()">
-              <q-item-main>
-                <q-item-tile label>France</q-item-tile>
-              </q-item-main>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
 
 
-        <q-toggle v-model="accept" label="I accept the license and terms" />
+          <q-input
+            filled
+            v-model="authentificationSociety"
+            label="Your SIRET"
+            hint="SIRET"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
 
-        <div>
-          <q-btn label="Submit" type="submit" color="primary"/>
-          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-        </div>
-      </q-form>
+          <q-input
+            filled
+            v-model="sepa"
+            label="SEPA"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
+
+          <q-input
+            filled
+            v-model="adresse"
+            label="Adresse"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
+
+          <q-input
+            filled
+            v-model="city"
+            label="City"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
+
+          <q-input
+            filled
+            v-model="country"
+            label="Country"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
+
+
+          <q-toggle v-model="accept" label="I accept the license and terms" />
+
+          <div>
+            <q-btn label="Submit" type="submit" color="primary"/>
+            <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+          </div>
+        </q-form>
+      </q-card>
+
 
     </div>
   </q-page>
