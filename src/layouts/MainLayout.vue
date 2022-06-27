@@ -12,10 +12,18 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          <div style="display: flex">
+            <img
+              alt="Openfood logo"
+              src="~assets/openfood_logo.svg"
+              style="width: 50px; height: 50px"
+            >
+            <p style="margin-bottom: auto; margin-top: auto">OpenFood</p>
+          </div>
+
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>OpenFood v1.0</div>
       </q-toolbar>
     </q-header>
 
