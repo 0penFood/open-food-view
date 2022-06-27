@@ -13,17 +13,26 @@
 
         <q-toolbar-title>
           <div style="display: flex">
-            <img
-              alt="Openfood logo"
-              src="~assets/openfood_logo.svg"
-              style="width: 50px; height: 50px"
-            >
-            <p style="margin-bottom: auto; margin-top: auto">OpenFood</p>
+            <a href="/">
+              <img
+                alt="Openfood logo"
+                src="~assets/openfood_logo.svg"
+                style="width: 50px; height: 50px"
+              >
+            </a>
+            <a href="/" style="margin-bottom: auto; margin-top: auto">
+              OpenFood
+            </a>
           </div>
-
         </q-toolbar-title>
-
-        <div>OpenFood v1.0</div>
+          <div v-if="!isConnected">
+            <a href="#/login">Log In</a>
+          </div>
+          <div v-else style="">
+            <a href="#">Profile</a>
+            <p> | </p>
+            <a>Disconnect</a>
+          </div>
       </q-toolbar>
     </q-header>
 
@@ -55,6 +64,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { Cookies } from "quasar";
 import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
@@ -104,6 +114,19 @@ const linksList = [
 
 export default defineComponent({
   name: 'MainLayout',
+
+
+
+data: function () {
+  return {
+    isConnected: Cookies.has('auth_token'),
+  }
+},
+
+  updated() {
+    this.isConnected = Cookies.has('auth_token');
+  },
+
 
   components: {
     EssentialLink
