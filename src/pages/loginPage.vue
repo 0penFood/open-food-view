@@ -70,7 +70,9 @@ export default {
       onSubmit () {
         api.post('/auth/login', { email: email.value, password: password.value})
           .then((response) => {
-            Cookies.set('auth_token', response.data)
+            console.log(response.data);
+            Cookies.set('auth_token', response.data["access_token"])
+            Cookies.set('current_id', response.data["id"])
             router.push({ path: '/' })
         })
           .catch(() => {
