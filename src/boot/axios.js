@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
+import { Cookies } from "quasar";
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -7,7 +8,16 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'http://135.125.103.44:8081/' })
+let api ="";
+if(!Cookies.has('auth_token'))
+{
+  api = axios.create({ baseURL: 'http://135.125.103.44:8081/'});
+}
+else
+{
+  api = axios.create({ baseURL: 'http://135.125.103.44:8081/' , headers: {authorization: `Bearer `+Cookies.get('auth_token') }})
+}
+
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

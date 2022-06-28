@@ -4,14 +4,18 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
-    ]
-  },
-  {
-    path: '/registration/restaurants',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/RegistrationRestaurantPage.vue') }
+      {
+        path: '',
+        component: () => import('pages/IndexPage.vue')
+      },
+      {
+        path: 'signup',
+        component: () => import('pages/SignUpPage.vue')
+      },
+      {
+        path: 'signup/restaurants',
+        component: () => import('pages/RegistrationRestaurantPage.vue')
+      }
     ]
   },
 

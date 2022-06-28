@@ -89,6 +89,8 @@
 <script>
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
+import { Cookies } from 'quasar'
+import { api } from "boot/axios";
 
 export default {
   name: "RegistrationRestaurantPage",
@@ -101,6 +103,8 @@ export default {
     const restaurantType = ref(null)
     const sepa = ref(null)
     const city = ref(null)
+    const country = ref(null)
+    const type = ref(null)
     const adresse = ref(null)
 
     const accept = ref(false)
@@ -111,30 +115,50 @@ export default {
       restaurantType,
       sepa,
       city,
+      type,
+      country,
       adresse,
       accept,
 
       onSubmit () {
-        if (accept.value !== true) {
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
+
+        if (accept.value === true) {
+
+          api.post('/restaurants', {
+            type: type.value
           })
+            .then((idRestaurantDb) => {
+              api.post('/societies', {
+                societyAuth: authentificationSociety.value,
+                societyName: name.value,
+                sepa: sepa.value,
+                area: country.value + ";" + city.value + ";" + adresse.value,
+                idRestaurant : idRestaurantDb.data.id,
+              })
+                .then((idsocietyDb) => {
+                  /*api.post('/users/society', {
+                    fk_user: Cookies.get('current_id'),
+                    fk_society: idsocietyDb.data.id,
+                  })
+                    .then(() => {
+                      console.log("Success");
+                      router.push({ path: '/' })
+                    })
+                    .catch(() => {
+                      console.log("Error");
+                    })*/
+                })
+                .catch(() => {
+                  console.log("Error");
+                })
+            })
+            .catch(() => {
+              console.log("Error");
+            })
         }
         else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-          })
+          console.log("Error");
         }
-      },
-
-      clickTypeRestaurant(){
-        console.log("Je suis ici");
       },
 
       onReset () {
@@ -143,6 +167,8 @@ export default {
         restaurantType.value = null
         sepa.value = null
         city.value = null
+        type.value = null
+        country.value = null
         adresse.value = null
 
         accept.value = false
