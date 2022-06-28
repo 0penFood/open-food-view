@@ -32,6 +32,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel';
+import {getRestaurantsForCarousel} from '../js/restaurants'
 
 import 'vue3-carousel/dist/carousel.css';
 
@@ -111,6 +112,7 @@ export default defineComponent({
   },
 
   setup () {
+    console.log(getRestaurantsForCarousel())
     return {
       datascarousels: datasCarousel,
     }
