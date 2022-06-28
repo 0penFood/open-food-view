@@ -27,9 +27,10 @@
         </q-toolbar-title>
           <div v-if="!isConnected">
             <a href="#/login">Log In</a>
+            <a href="#/registration">Sign Up</a>
           </div>
           <div v-else style="">
-            <a href="#">Profile</a>
+            <a href="#/profile">Profile</a>
             <p> | </p>
             <a>Disconnect</a>
           </div>

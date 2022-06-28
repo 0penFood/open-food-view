@@ -31,6 +31,13 @@
           val => val !== null && val.length > 0 || 'Please type your password',]"
             />
             <div>
+              <a href="#/registration" style="color:orange">Sign Up</a>
+            </div>
+            <div>
+              <a href="#/registration" style="color:black">Profesionnal?</a>
+            </div>
+
+            <div>
               <q-btn label="Submit" type="submit" color="primary"/>
               <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
             </div>
@@ -86,5 +93,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
