@@ -135,10 +135,10 @@ export default {
                 area: country.value + ";" + city.value + ";" + adresse.value,
                 idRestaurant : idRestaurantDb.data.id,
               })
-                .then((idsocietyDb) => {
-                  /*api.post('/users/society', {
+                .then((idSocietyDb) => {
+                  api.post('/users/society', {
                     fk_user: Cookies.get('current_id'),
-                    fk_society: idsocietyDb.data.id,
+                    fk_society: idSocietyDb.data.id,
                   })
                     .then(() => {
                       console.log("Success");
@@ -146,7 +146,7 @@ export default {
                     })
                     .catch(() => {
                       console.log("Error");
-                    })*/
+                    })
                 })
                 .catch(() => {
                   console.log("Error");
