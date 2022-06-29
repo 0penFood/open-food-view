@@ -13,17 +13,26 @@
 
         <q-toolbar-title>
           <div style="display: flex">
-            <img
-              alt="Openfood logo"
-              src="~assets/openfood_logo.svg"
-              style="width: 50px; height: 50px"
-            >
-            <p style="margin-bottom: auto; margin-top: auto">OpenFood</p>
+            <a href="/">
+              <img
+                alt="Openfood logo"
+                src="~assets/openfood_logo.svg"
+                style="width: 50px; height: 50px"
+              >
+            </a>
+            <a href="/" style="margin-bottom: auto; margin-top: auto">
+              OpenFood
+            </a>
           </div>
-
         </q-toolbar-title>
-
-        <div>OpenFood v1.0</div>
+          <div v-if="!isConnected">
+            <a href="#/login">Log In</a>
+          </div>
+          <div v-else style="display: flex;">
+            <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
+            <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
+            <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
+          </div>
       </q-toolbar>
     </q-header>
 
@@ -55,7 +64,9 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import {Cookies, useQuasar } from "quasar";
 import EssentialLink from 'components/EssentialLink.vue'
+import {useRouter} from "vue-router";
 
 const linksList = [
   {
@@ -105,14 +116,51 @@ const linksList = [
 export default defineComponent({
   name: 'MainLayout',
 
+data: function () {
+  return {
+    isConnected: Cookies.has('auth_token'),
+  }
+},
+
+methods: {
+  disconnect() {
+    try {
+      Cookies.remove('auth_token')
+      this.triggerPositive();
+    } catch (e) {
+    }
+  },
+},
+  updated() {
+    this.isConnected = Cookies.has('auth_token');
+  },
+
   components: {
     EssentialLink
   },
 
   setup () {
     const leftDrawerOpen = ref(false)
+    const $q = useQuasar();
+    const router = useRouter()
 
     return {
+      triggerPositive () {
+        $q.notify({
+          progress: true,
+          message: 'You have been successfully disconnected... You will be soon redirected to the home page.',
+          color: 'primary',
+          multiLine: true,
+          icon: 'info',
+          position: "center",
+          actions: [
+            { label: 'Reconnect', color: 'yellow', handler: () => { router.push({path: '/login'})} }
+          ]
+        })
+        setTimeout(() => {
+          router.push({ path: '/' });
+        }, 2000)
+      },
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
