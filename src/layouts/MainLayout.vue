@@ -45,7 +45,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Navigation
         </q-item-label>
 
         <EssentialLink
@@ -70,47 +70,41 @@ import {useRouter} from "vue-router";
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
+    title: 'Orders',
+    caption: 'orders',
+    icon: 'code',
     link: 'https://quasar.dev'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'History',
+    caption: 'history',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'PaternShip',
+    caption: 'paternShip',
+    icon: 'record_voice_over',
+    link: 'https://chat.quasar.dev'
+  },
+  {
+    title: 'Help',
+    caption: 'chat help',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
+    title: 'Add Restaurant',
+    caption: 'Go to website Restaurant',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
+    title: 'Pass command with User',
+    caption: 'Go to website User',
     icon: 'rss_feed',
     link: 'https://twitter.quasar.dev'
   },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ]
 
 export default defineComponent({
