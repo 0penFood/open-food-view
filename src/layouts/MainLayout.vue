@@ -45,7 +45,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Naviguation
         </q-item-label>
 
         <EssentialLink
@@ -69,47 +69,53 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
+    title: 'Restaurants',
+    caption: 'restaurants',
+    icon: 'code',
     link: 'https://quasar.dev'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'Favory',
+    caption: 'favory',
+    icon: 'code',
+    link: 'https://quasar.dev'
+  },
+  {
+    title: 'Orders',
+    caption: 'orders',
+    icon: 'code',
+    link: 'https://quasar.dev'
+  },
+  {
+    title: 'History',
+    caption: 'history',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'PaternShip',
+    caption: 'paternShip',
+    icon: 'record_voice_over',
+    link: 'https://chat.quasar.dev'
+  },
+  {
+    title: 'Help',
+    caption: 'chat help',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
+    title: 'Add Deliver Man',
+    caption: 'Go to website Deliver',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    title: 'Add Restaurants',
+    caption: 'Go to website Restaurants',
+    icon: 'record_voice_over',
+    link: 'https://forum.quasar.dev'
   },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ]
 
 export default defineComponent({
