@@ -10,8 +10,19 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useRouter } from "vue-router";
+import { Cookies } from "quasar";
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+
+  setup()
+  {
+    if(Cookies.get('auth_token') === null)
+    {
+      const router = useRouter()
+      router.push({ path: '/login' })
+    }
+  }
 })
 </script>

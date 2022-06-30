@@ -25,8 +25,10 @@
             </a>
           </div>
         </q-toolbar-title>
-          <div v-if="!isConnected">
-            <a href="#/login">Log In</a>
+          <div v-if="!isConnected" style="display: flex;">
+            <a href="#/signup" class="q-pa-sm">Sign up</a>
+            <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
+            <a href="#/login" class="q-pa-sm">Log In</a>
           </div>
           <div v-else style="display: flex;">
             <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
@@ -38,7 +40,6 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
       bordered
     >
       <q-list>
