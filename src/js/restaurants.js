@@ -24,7 +24,9 @@ export function getRestaurantsForCarousel() {
   async function getSociety(id_restaurants) {
     return await api.get('societies/'+id_restaurants+'/restau/partial')
       .then((response) => {
-        return response.data[Object.keys(response.data)].societyName
+        if(typeof response.data[Object.keys(response.data)].societyName !== 'undefined'){
+          return response.data[Object.keys(response.data)].societyName
+        }
       })
   }
 
@@ -32,17 +34,20 @@ export function getRestaurantsForCarousel() {
     api.get('/restaurants')
       .then(async(response) => {
         let count = Object.keys(response.data).length;
+        console.log(count)
         for(let i=0; i < count; i++){
           const restaurantName = await getSociety(response.data[i].id)
-          jsonForCarousel.push({
-            type : response.data[i].type,
-            indexNbx: i,
-            restauData : {
-              title: restaurantName,
+          if(typeof restaurantName !== 'undefined'){
+            jsonForCarousel.push({
+              type : response.data[i].type,
               indexNbx: i,
-              link: "#",
-            }
-          })
+              restauData : {
+                title: restaurantName,
+                indexNbx: i,
+                link: "#",
+              }
+            })
+          }
         }
       }).catch((e) => {
         console.log(e)
