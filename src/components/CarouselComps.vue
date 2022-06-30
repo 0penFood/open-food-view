@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, toRaw } from 'vue'
 import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel';
 import {getRestaurantsForCarousel} from '../js/restaurants'
 
@@ -99,6 +99,8 @@ const datasCarousel=[
   }
 ]
 
+let valRtnDt = []
+
 
 export default defineComponent({
   name: 'CarrouselComps',
@@ -111,19 +113,25 @@ export default defineComponent({
     Navigation,
   },
 
-  setup () {
-    console.log(getRestaurantsForCarousel())
-    return {
-      datascarousels: datasCarousel,
-    }
-  },
 
   data()
   {
     return{
-      carousel: 1
+      carousel: 1,
+      valRtnDt: [],
+      datascarousels: []
     }
-  }
+  },
+
+  created() {
+    this.valRtnDt = getRestaurantsForCarousel();
+
+    this.datascarousels = toRaw(this.valRtnDt)
+
+
+    console.log(this.datascarousels)
+  },
+
 });
 </script>
 

@@ -8,18 +8,18 @@ export function getRestaurantsForCarousel() {
     {
       type : "",
       indexNbx: 0,
-      restauData : {
+      restauData : [{
         title: "",
         indexNbx: 0,
         icon: "",
         link: "",
         picture: "",
         description: "",
-      }
+      },]
     }
   ]
 
-  jsonForCarousel.pop()
+  jsonForCarousel.shift();
 
   async function getSociety(id_restaurants) {
     return await api.get('societies/'+id_restaurants+'/restau/partial')
@@ -34,25 +34,48 @@ export function getRestaurantsForCarousel() {
     api.get('/restaurants')
       .then(async(response) => {
         let count = Object.keys(response.data).length;
-        console.log(count)
         for(let i=0; i < count; i++){
+
           const restaurantName = await getSociety(response.data[i].id)
-          if(typeof restaurantName !== 'undefined'){
-            jsonForCarousel.push({
-              type : response.data[i].type,
-              indexNbx: i,
-              restauData : {
-                title: restaurantName,
-                indexNbx: i,
-                link: "#",
+
+          if(typeof restaurantName !== 'undefined')
+          {
+            let existType = -1;
+            for(let y=0; y < jsonForCarousel.length; y++)
+            {
+              if(response.data[i].type === jsonForCarousel[y].type)
+              {
+                existType = y;
+                break;
               }
-            })
+            }
+
+            if(existType != -1) {
+              jsonForCarousel[existType].restauData.push({
+                title: restaurantName,
+                indexNbx: existType,
+                link: "#",
+              });
+            }
+            else {
+              jsonForCarousel.push({
+                type: response.data[i].type,
+                indexNbx: i,
+                restauData: [{
+                  title: restaurantName,
+                  indexNbx: i,
+                  link: "#",
+                },]
+              })
+            }
           }
         }
       }).catch((e) => {
-        console.log(e)
-      })
+      console.log(e)
+    })
   }
+
+
   getRestaurants()
 
   return jsonForCarousel;
