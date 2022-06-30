@@ -10,8 +10,14 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+
+  setup(){
+    const router = useRouter()
+    router.push({ path: '/login' })
+  }
 })
 </script>
