@@ -36,72 +36,6 @@ import {getRestaurantsForCarousel} from '../js/restaurants'
 
 import 'vue3-carousel/dist/carousel.css';
 
-const datasCarousel=[
-  {
-    type: 'Italian',
-    indexNbx: 3,
-    restauData : [
-      {
-      title: 'Idiot',
-      indexNbx: 3,
-      icon: 'school',
-      link: 'https://quasar.dev',
-      picture: '~assets/openfood_logo.svg',
-      description: 'school',
-      },
-      {
-        title: 'Idiot2',
-        indexNbx: 3,
-        icon: 'school',
-        link: 'https://quasar.dev',
-        picture: '~assets/openfood_logo.svg',
-        description: 'school',
-      },
-      {
-        title: 'Idiot3',
-        indexNbx: 3,
-        icon: 'school',
-        link: 'https://quasar.dev',
-        picture: '~assets/openfood_logo.svg',
-        description: 'school',
-      },
-    ],
-  },
-  {
-    type: 'Chinese',
-    indexNbx: 3,
-    restauData : [
-      {
-        title: 'Idiot',
-        indexNbx: 3,
-        icon: 'school',
-        link: 'https://quasar.dev',
-        picture: '~assets/openfood_logo.svg',
-        description: 'school',
-      },
-      {
-        title: 'Idiot2',
-        indexNbx: 3,
-        icon: 'school',
-        link: 'https://quasar.dev',
-        picture: '~assets/openfood_logo.svg',
-        description: 'school',
-      },
-      {
-        title: 'Idiot3',
-        indexNbx: 3,
-        icon: 'school',
-        link: 'https://quasar.dev',
-        picture: '~assets/openfood_logo.svg',
-        description: 'school',
-      },
-    ],
-  }
-]
-
-let valRtnDt = []
-
-
 export default defineComponent({
   name: 'CarrouselComps',
 
@@ -113,25 +47,17 @@ export default defineComponent({
     Navigation,
   },
 
-
   data()
   {
     return{
       carousel: 1,
-      valRtnDt: [],
       datascarousels: []
     }
   },
 
-  created() {
-    this.valRtnDt = getRestaurantsForCarousel();
-
-    this.datascarousels = toRaw(this.valRtnDt)
-
-
-    console.log(this.datascarousels)
-  },
-
+  async mounted() {
+    this.datascarousels = await getRestaurantsForCarousel()
+  }
 });
 </script>
 
