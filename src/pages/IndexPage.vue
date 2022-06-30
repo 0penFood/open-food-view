@@ -1,17 +1,20 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Openfood logo"
-      src="~assets/openfood_logo.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page padding class="bg-image">
+    <carousel-comps></carousel-comps>
   </q-page>
 </template>
-
 <script>
+import CarouselComps from "components/CarouselComps.vue"
 import { defineComponent } from 'vue'
 
+
 export default defineComponent({
-  name: 'IndexPage'
+  components: {
+    CarouselComps
+  },
 })
 </script>
+
+<style scoped>
+
+</style>
