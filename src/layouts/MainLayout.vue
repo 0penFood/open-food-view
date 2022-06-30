@@ -31,7 +31,7 @@
           <a href="#/login" class="q-pa-sm">Log In</a>
         </div>
         <div v-else style="display: flex;">
-          <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
+          <a href="#/profile" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
           <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
           <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
         </div>
@@ -40,13 +40,14 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      show-if-above
       bordered
     >
       <q-list>
         <q-item-label
           header
         >
-          Naviguation
+          Essential Links
         </q-item-label>
 
         <EssentialLink
@@ -65,82 +66,69 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import {Cookies, useQuasar } from "quasar";
+import { Cookies } from "quasar";
 import EssentialLink from 'components/EssentialLink.vue'
-import {useRouter} from "vue-router";
 
 const linksList = [
   {
-    title: 'Restaurants',
-    caption: 'restaurants',
-    icon: 'code',
+    title: 'Docs',
+    caption: 'quasar.dev',
+    icon: 'school',
     link: 'https://quasar.dev'
   },
   {
-    title: 'Favory',
-    caption: 'favory',
-    icon: 'code',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Orders',
-    caption: 'orders',
-    icon: 'code',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'History',
-    caption: 'history',
+    title: 'Github',
+    caption: 'github.com/quasarframework',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'PaternShip',
-    caption: 'paternShip',
-    icon: 'record_voice_over',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Help',
-    caption: 'chat help',
+    title: 'Discord Chat Channel',
+    caption: 'chat.quasar.dev',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Add Deliver Man',
-    caption: 'Go to website Deliver',
+    title: 'Forum',
+    caption: 'forum.quasar.dev',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Add Restaurants',
-    caption: 'Go to website Restaurants',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: 'Twitter',
+    caption: '@quasarframework',
+    icon: 'rss_feed',
+    link: 'https://twitter.quasar.dev'
   },
+  {
+    title: 'Facebook',
+    caption: '@QuasarFramework',
+    icon: 'public',
+    link: 'https://facebook.quasar.dev'
+  },
+  {
+    title: 'Quasar Awesome',
+    caption: 'Community Quasar projects',
+    icon: 'favorite',
+    link: 'https://awesome.quasar.dev'
+  }
 ]
 
 export default defineComponent({
   name: 'MainLayout',
 
-  data: function () {
-    return {
-      isConnected: Cookies.has('auth_token'),
-    }
-  },
 
-  methods: {
-    disconnect() {
-      try {
-        Cookies.remove('auth_token')
-        this.triggerPositive();
-      } catch (e) {
-      }
-    },
-  },
+
+data: function () {
+  return {
+    isConnected: Cookies.has('auth_token'),
+  }
+},
+
   updated() {
     this.isConnected = Cookies.has('auth_token');
   },
+
 
   components: {
     EssentialLink
@@ -148,26 +136,8 @@ export default defineComponent({
 
   setup () {
     const leftDrawerOpen = ref(false)
-    const $q = useQuasar();
-    const router = useRouter()
 
     return {
-      triggerPositive () {
-        $q.notify({
-          progress: true,
-          message: 'You have been successfully disconnected... You will be soon redirected to the home page.',
-          color: 'primary',
-          multiLine: true,
-          icon: 'info',
-          position: "center",
-          actions: [
-            { label: 'Reconnect', color: 'yellow', handler: () => { router.push({path: '/login'})} }
-          ]
-        })
-        setTimeout(() => {
-          router.push({ path: '/' });
-        }, 2000)
-      },
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {

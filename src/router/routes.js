@@ -1,26 +1,39 @@
 
 const routes = [
   {
-    path: '/',
+    path: '',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '', component: () => import('pages/IndexPage.vue')
-      }
+        path: '',
+        component: () => import('pages/IndexPage.vue')
+      },
+      {
+        path: '/login',
+        component: () => import('pages/loginPage.vue')
+      },
+      {
+        path: '/signup',
+        component: () => import('pages/SignUpPage.vue')
+      },
+      {
+        path: '/profile',
+        component: () => import('pages/ProfilPage.vue')
+      },
     ]
   },
   {
-    path: '/labs',
+    path: '/registration/professional/restaurant',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/labsPage.vue') }
+      { path: '', component: () => import('pages/SignUpPage.vue') }
     ]
   },
   {
-    path: '/login',
+    path: '/registration/professional/delivery',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/loginPage.vue') }
+      { path: '', component: () => import('pages/SignUpPage.vue') }
     ]
   },
 

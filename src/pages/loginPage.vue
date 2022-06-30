@@ -31,6 +31,13 @@
           val => val !== null && val.length > 0 || 'Please type your password',]"
             />
             <div>
+              <a href="#/registration" style="color:orange">Sign Up</a>
+            </div>
+            <div>
+              <a href="#/registration" style="color:black">Profesionnal?</a>
+            </div>
+
+            <div>
               <q-btn label="Submit" type="submit" color="primary"/>
               <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
             </div>
@@ -63,7 +70,9 @@ export default {
       onSubmit () {
         api.post('/auth/login', { email: email.value, password: password.value})
           .then((response) => {
-            Cookies.set('auth_token', response.data)
+            console.log(response.data);
+            Cookies.set('auth_token', response.data["access_token"])
+            Cookies.set('current_id', response.data["id"])
             router.push({ path: '/' })
         })
           .catch(() => {
@@ -86,5 +95,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
