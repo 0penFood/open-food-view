@@ -7,6 +7,7 @@
 import CarouselComps from "components/CarouselComps.vue"
 import { defineComponent } from 'vue'
 
+
 export default defineComponent({
   components: {
     CarouselComps

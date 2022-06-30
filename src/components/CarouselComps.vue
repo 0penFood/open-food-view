@@ -9,9 +9,9 @@
              :name="dataZoom.indexNbx"
              :url="dataZoom.picture"
              class="q-pa-sm">
-        <div class="full-height full-width flex flex-center" style="background-color: rgba(0, 0, 0, 0.68) !important;">
+        <div class="full-height full-width flex flex-center" :style="'background-image: url('+dataZoom.picture+'); background-size : cover; !important;'">
           <div class="custom-caption">
-            <div class="text-h4 font-size12 main_line animation_2">{{ dataZoom.title }}</div><br><br><br>
+            <div class="text-h4 font-size12 main_line animation_2" style="color: white">{{ dataZoom.title }}</div><br><br><br>
             <div class="text-h5 animation_1">{{ dataZoom.description }}</div><br><br><br>
             <div class="animation_2">
               <q-btn size="md" :style="'background:#ff851b; color: white'" label="ORDER" :href="dataZoom.link"/>

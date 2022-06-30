@@ -52,6 +52,7 @@ export async function getRestaurantsForCarousel() {
                 title: restaurantName,
                 indexNbx: existType,
                 link: "#",
+                picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
               });
             } else {
               jsonForCarousel.push({
@@ -61,6 +62,7 @@ export async function getRestaurantsForCarousel() {
                   title: restaurantName,
                   indexNbx: i,
                   link: "#",
+                  picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
                 },]
               })
             }
