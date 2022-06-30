@@ -25,14 +25,16 @@
             </a>
           </div>
         </q-toolbar-title>
-          <div v-if="!isConnected">
-            <a href="#/login">Log In</a>
-          </div>
-          <div v-else style="display: flex;">
-            <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
-            <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
-            <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
-          </div>
+        <div v-if="!isConnected" style="display: flex;">
+          <a href="#/signup" class="q-pa-sm">Sign up</a>
+          <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
+          <a href="#/login" class="q-pa-sm">Log In</a>
+        </div>
+        <div v-else style="display: flex;">
+          <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
+          <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
+          <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -121,21 +123,21 @@ const linksList = [
 export default defineComponent({
   name: 'MainLayout',
 
-data: function () {
-  return {
-    isConnected: Cookies.has('auth_token'),
-  }
-},
-
-methods: {
-  disconnect() {
-    try {
-      Cookies.remove('auth_token')
-      this.triggerPositive();
-    } catch (e) {
+  data: function () {
+    return {
+      isConnected: Cookies.has('auth_token'),
     }
   },
-},
+
+  methods: {
+    disconnect() {
+      try {
+        Cookies.remove('auth_token')
+        this.triggerPositive();
+      } catch (e) {
+      }
+    },
+  },
   updated() {
     this.isConnected = Cookies.has('auth_token');
   },
