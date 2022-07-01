@@ -51,7 +51,7 @@ export async function getRestaurantsForCarousel() {
               jsonForCarousel[existType].restauData.push({
                 title: restaurantName,
                 indexNbx: existType,
-                link: "#",
+                link: "#/details",
                 picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
               });
             } else {
@@ -61,7 +61,7 @@ export async function getRestaurantsForCarousel() {
                 restauData: [{
                   title: restaurantName,
                   indexNbx: i,
-                  link: "#",
+                  link: "#/details",
                   picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
                 },]
               })
