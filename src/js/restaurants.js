@@ -34,6 +34,7 @@ export async function getRestaurantsForCarousel() {
     return api.get('/restaurants')
       .then(async (response) => {
         let count = Object.keys(response.data).length;
+
         for (let i = 0; i < count; i++) {
 
           const restaurantName = await getSociety(response.data[i].id)
@@ -51,7 +52,7 @@ export async function getRestaurantsForCarousel() {
               jsonForCarousel[existType].restauData.push({
                 title: restaurantName,
                 indexNbx: existType,
-                link: "details",
+                link: "/details/"+response.data[i].id,
                 picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
               });
             } else {
@@ -61,7 +62,7 @@ export async function getRestaurantsForCarousel() {
                 restauData: [{
                   title: restaurantName,
                   indexNbx: i,
-                  link: "details",
+                  link: "/details/"+response.data[i].id,
                   picture: "https://135.125.103.44/s/iXMADLHMgxkjpjE/preview",
                 },]
               })

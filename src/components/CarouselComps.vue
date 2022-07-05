@@ -55,9 +55,9 @@ export default defineComponent({
       datascarousels: []
     }
   },
-
   async mounted() {
     this.datascarousels = await getRestaurantsForCarousel()
+
   }
 });
 </script>

@@ -24,7 +24,7 @@
         <!--<q-scroll-area :style="{'height':(win_height-200)+'px'}">-->
         <div class="row">
           <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" :class="$q.platform.is.desktop ? '' : 'q-px-md'">
-            <div class="text-subtitle1 text-grey-10 q-mt-sm q-pt-xs">Pizza del Nico
+            <div class="text-subtitle1 text-grey-10 q-mt-sm q-pt-xs">{{ nameSociety }}
             </div>
             <div>
               <q-chip size="10px" class="text-weight-bold q-px-xs" square color="green-7" text-color="white"
@@ -429,8 +429,16 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
+import router from "src/router";
+import { api } from "boot/axios";
+
+let dataRestaurant;
+
 export default {
   name: "DetailsPage.vue",
+  props: ['id'],
+
   data() {
     return {
       slide: 1,
@@ -441,8 +449,33 @@ export default {
       rat_3: 3,
       rat_2: 2,
       rat_1: 1,
+      nameSociety: "",
     }
   },
+
+  async created()
+  {
+    this.nameSociety = await api.get('societies/' + this.id + '/restau/partial')
+    .then((response) => {
+      if (typeof response.data[Object.keys(response.data)].societyName !== 'undefined') {
+        return response.data[Object.keys(response.data)].societyName
+      }
+    })
+
+    const pathRoute = '/restaurants/'+this.id;
+
+
+    this.dataRestaurant;
+
+    api.get(pathRoute)
+      .then(async (response) => {
+
+        console.log(await response.data)
+      }).catch((e) => {
+        console.log(e)
+      })
+  },
+
 
   methods: {
     deliveryTime(fast) {
@@ -473,9 +506,8 @@ export default {
           time = current.getHours() + ":" + newTime;
         }
       }
-      const dateTime = date +' '+ time;
 
-      return dateTime;
+      return date +' '+ time;
     }
   },
   computed: {

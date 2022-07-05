@@ -21,8 +21,9 @@ const routes = [
         component: () => import('pages/ProfilPage.vue')
       },
       {
-        path: '/details',
-        component: () => import('pages/DetailsPage.vue')
+        path: '/details/:id',
+        component: () => import('pages/DetailsPage.vue'),
+        props: true,
       },
     ]
   },
