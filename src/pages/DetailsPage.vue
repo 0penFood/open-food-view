@@ -54,10 +54,11 @@
             </div>
             <div class="q-mt-sm">
               <div class="text-subtitle1 text-green-8 text-weight-bold">In stock.</div>
-              <div class="text-caption q-mt-sm text-grey-8 text-weight-bold">Delivery by: <span class="text-black">Fri, Jul 1, 11:00</span>
+              <div class="text-caption q-mt-sm text-grey-8 text-weight-bold">Delivery by:
+                <span class="text-black">{{deliveryTime(false)}}</span>
               </div>
               <div class="text-caption text-subtitle2 text-grey-8 text-weight-bold">Fastest delivery: <span
-                class="text-black">Fri, Jul 1, 10:45</span></div>
+                class="text-black">{{deliveryTime(true)}}</span></div>
             </div>
             <div class="q-mt-md">
               <q-btn class="q-mt-md" color="orange-9" icon="shopping_cart" label="Add to cart"/>
@@ -440,6 +441,41 @@ export default {
       rat_3: 3,
       rat_2: 2,
       rat_1: 1,
+    }
+  },
+
+  methods: {
+    deliveryTime(fast) {
+      const current = new Date();
+      const date = current.getFullYear()+'-'+(current.getMonth()+1)+'-'+current.getDate();
+      let time;
+      if(fast)
+      {
+        let newTime = current.getMinutes() + 15;
+        if(newTime > 60)
+        {
+          time = (current.getHours() + 1) + ":" + (newTime - 60);
+        }
+        else
+        {
+          time = current.getHours() + ":" + newTime;
+        }
+      }
+      else
+      {
+        let newTime = current.getMinutes() + 35;
+        if(newTime > 60)
+        {
+          time = (current.getHours() + 1) + ":" + (newTime - 60);
+        }
+        else
+        {
+          time = current.getHours() + ":" + newTime;
+        }
+      }
+      const dateTime = date +' '+ time;
+
+      return dateTime;
     }
   },
   computed: {

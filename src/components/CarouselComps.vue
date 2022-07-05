@@ -14,7 +14,7 @@
             <div class="text-h4 font-size12 main_line animation_2" style="color: white">{{ dataZoom.title }}</div><br><br><br>
             <div class="text-h5 animation_1">{{ dataZoom.description }}</div><br><br><br>
             <div class="animation_2">
-              <q-btn size="md" :style="'background:#ff851b; color: white'" label="ORDER" :href="dataZoom.link"/>
+              <q-btn size="md" :style="'background:#ff851b; color: white'" label="ORDER" @click="$router.replace(dataZoom.link)"/>
             </div>
           </div>
         </div>
@@ -46,6 +46,7 @@ export default defineComponent({
     Pagination,
     Navigation,
   },
+
 
   data()
   {
