@@ -65,8 +65,9 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import { Cookies } from "quasar";
+import { Cookies, useQuasar } from "quasar";
 import EssentialLink from 'components/EssentialLink.vue'
+import {useRouter} from "vue-router";
 
 const linksList = [
   {
@@ -128,6 +129,16 @@ data: function () {
     this.isConnected = Cookies.has('auth_token');
   },
 
+  methods: {
+    disconnect() {
+      try {
+        Cookies.remove('auth_token');
+        Cookies.remove('current_id');
+        this.triggerPositive();
+      } catch (e) {
+      }
+    },
+  },
 
   components: {
     EssentialLink
@@ -135,8 +146,27 @@ data: function () {
 
   setup () {
     const leftDrawerOpen = ref(false)
+    const $q = useQuasar();
+    const router = useRouter()
 
     return {
+      triggerPositive () {
+        $q.notify({
+          progress: true,
+          message: 'You have been successfully disconnected... You will be soon redirected to the home page.',
+          color: 'primary',
+          multiLine: true,
+          icon: 'info',
+          position: "center",
+          actions: [
+            { label: 'Reconnect', color: 'yellow', handler: () => { router.push({path: '/login'})} }
+          ]
+        })
+        setTimeout(() => {
+          router.push({ path: '/' });
+        }, 2000)
+      },
+
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
