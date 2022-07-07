@@ -104,8 +104,6 @@ export default {
         };
 
 
-        console.log(data)
-
         api.post('users',data)
           .then(() => {
             $q.notify({

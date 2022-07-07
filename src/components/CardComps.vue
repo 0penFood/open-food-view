@@ -81,7 +81,6 @@ export default defineComponent({
       else{
         console.log("Je suis deconnecter " + this.id);
         location.replace("#/login");
-        //router.push({ path: 'login' });
       }
     }
   }
