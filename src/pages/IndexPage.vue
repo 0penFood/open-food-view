@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { Cookies } from 'quasar';
 import { defineComponent } from 'vue'
 import { useRouter } from "vue-router";
 
@@ -17,7 +18,9 @@ export default defineComponent({
 
   setup(){
     const router = useRouter()
-    router.push({ path: '/login' })
+    if (!Cookies.has('auth_token')) {
+      router.push({ path: '/login' })
+    }
   }
 })
 </script>
