@@ -54,6 +54,7 @@ import { ref } from 'vue'
 import { api } from 'boot/axios'
 import { Cookies } from 'quasar'
 import { useRouter } from 'vue-router'
+import { hashPassword } from "../js/hash";
 
 export default {
   setup () {
@@ -68,7 +69,7 @@ export default {
       password,
 
       onSubmit () {
-        api.post('/auth/login', { email: email.value, password: password.value})
+        api.post('/auth/login', { email: email.value, password: hashPassword(password.value)})
           .then((response) => {
             console.log(response.data);
             Cookies.set('auth_token', response.data["access_token"])

@@ -72,6 +72,7 @@ import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { api } from "boot/axios";
+import { hashPassword } from '../js/hash';
 
 export default {
   name: "SignUpPage",
@@ -94,13 +95,18 @@ export default {
       phone,
 
       onSubmit () {
-        api.post('/users', {
+        let data =  {
           firstName: firstname.value,
           lastName: lastname.value,
           email: email.value,
-          password: password.value,
+          password: hashPassword(password.value),
           phone: phone.value,
-        })
+        };
+
+
+        console.log(data)
+
+        api.post('users',data)
           .then(() => {
             $q.notify({
               color: 'positive',
@@ -109,11 +115,12 @@ export default {
             })
             router.push({ path: '/login' })
           })
-          .catch(() => {
+          .catch((e) => {
+            console.log(e);
             $q.notify({
               color: 'negative',
               position: 'top',
-              message: 'Email already used',
+              message: 'Email or Phone already used',
               icon: 'report_problem'
             })
           })
