@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { defineComponent, toRaw } from 'vue'
+import { defineComponent } from 'vue'
 import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel';
 import {getRestaurantsForCarousel} from '../js/restaurants'
 
@@ -57,7 +57,6 @@ export default defineComponent({
   },
   async mounted() {
     this.datascarousels = await getRestaurantsForCarousel()
-
   }
 });
 </script>
