@@ -80,10 +80,4 @@ export default defineComponent({
 .carousel__slide--active > .carousel__item {
   transform: scale(1.1);
 }
-
-.bg-image {
-  background-image: url("~assets/openfood_logo.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
 </style>

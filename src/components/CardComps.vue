@@ -1,7 +1,7 @@
 <template>
   <span class="border" />
   <div class="card col-lg-4 col-md-4 col-sm-12 col-xs-12">
-    <img src='https://img.freepik.com/photos-gratuite/pates-penne-sauce-tomate-au-poulet-tomates-table-bois_2829-19739.jpg?t=st=1656657684~exp=1656658284~hmac=df29d8b91e5bb4ca5967c2ec6c7532d29580e08f0d008680d00da7f82be05fc2&w=996' :alt="alt">
+    <img src='https://img.freepik.com/photos-gratuite/pates-penne-sauce-tomate-au-poulet-tomates-table-bois_2829-19739.jpg?t=st=1656657684~exp=1656658284~hmac=df29d8b91e5bb4ca5967c2ec6c7532d29580e08f0d008680d00da7f82be05fc2&w=996' alt="debut_img">
     <div class="details">
       <p><strong> {{ nameMenu }} </strong> </p>
       <small> {{ details }} </small>
@@ -36,7 +36,7 @@
       </q-list>
 
     </div>
-    <q-btn class="q-mt-md" color="orange-9" icon="shopping_cart" label="Add"/>
+    <q-btn class="q-mt-md" color="orange-9" icon="shopping_cart" label="Add" @Click="addToCart();" type="button"/>
   </div>
 
 </template>
@@ -44,6 +44,10 @@
 <script>
 import { defineComponent } from "vue";
 import { api } from "boot/axios";
+import { Cookies } from "quasar";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 export default defineComponent({
   name: 'CardComps',
@@ -53,9 +57,9 @@ export default defineComponent({
   {
     return{
       articles: [],
+      isConnected: Cookies.has('auth_token'),
     }
   },
-
 
   async created()
   {
@@ -65,8 +69,21 @@ export default defineComponent({
       }).catch((e) => {
         console.log(e)
       });
+  },
 
-    console.log(this.articles);
+
+  methods:{
+    addToCart(){
+      if(this.isConnected)
+      {
+        console.log("Je suis connecter");
+      }
+      else{
+        console.log("Je suis deconnecter");
+
+        router.push({ path: '#/login' });
+      }
+    }
   }
 });
 
