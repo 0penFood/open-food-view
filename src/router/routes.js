@@ -21,6 +21,10 @@ const routes = [
         component: () => import('pages/ProfilPage.vue')
       },
       {
+        path: '/cart',
+        component: () => import('pages/CartPage.vue')
+      },
+      {
         path: '/details/:id',
         component: () => import('pages/DetailsPage.vue'),
         props: true,

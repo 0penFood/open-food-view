@@ -51,7 +51,7 @@ const router = useRouter();
 
 export default defineComponent({
   name: 'CardComps',
-  props: ['nameMenu', 'id', 'price', 'details'],
+  props: ['nameMenu', 'idMenu', 'idRestau', 'price', 'details'],
 
   data()
   {
@@ -63,7 +63,7 @@ export default defineComponent({
 
   async created()
   {
-    this.articles = await api.get("/restaurants/menu/"+this.id)
+    this.articles = await api.get("/restaurants/menu/"+this.idMenu)
       .then(async (response) => {
         return response.data[0].articles;
       }).catch((e) => {
@@ -76,12 +76,118 @@ export default defineComponent({
     addToCart(){
       if(this.isConnected)
       {
-        console.log("Je suis connecter");
+        let dataCommandes={
+          idUser: Cookies.get('current_id'),
+          idRestau: this.idRestau,
+          timeDelivery: this.deliveryTime(false),
+          state: 0,
+          price: 5,
+          deliveryAddress: "test rue",
+        }
+
+
+        api.get("commandes/user/active/" + Cookies.get('current_id'))
+          .then(async (response) => {
+            let idCommand = "";
+
+            for(let i = 0; i < Object.keys(response.data).length; i++)
+            {
+              if(response.data[i].state == 0 && response.data[i].idRestau == this.idRestau)
+              {
+                idCommand = response.data[i].id;
+                break;
+              }
+            }
+
+            for (const article of this.articles) {
+
+              if(idCommand == "")
+              {
+                await api.post("commandes", dataCommandes)
+                  .then((response) => {
+                    idCommand = response.data.id;
+                    console.log("Perfect, I create commande with the restaurants!");
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                    console.log("Nop!")
+                  });
+              }
+
+              let dataArticle={
+                name : article.name,
+                quantity : article.quantity,
+                commandesID: idCommand,
+              };
+
+              await api.post("commandes/"+ idCommand + "/article", dataArticle)
+                .then((response) => {
+                  console.log(response.data);
+                  console.log("Perfect, I add article to command already with restaurants");
+                })
+                .catch((e) => {
+                  console.log(e);
+                  console.log("Nop!")
+                });
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("Nop!")
+          });
+
       }
       else{
-        console.log("Je suis deconnecter " + this.id);
         location.replace("#/login");
       }
+    },
+
+    deliveryTime(fast) {
+      const current = new Date();
+      const date = current.getFullYear()+'-'+(current.getMonth()+1)+'-'+current.getDate();
+      let time;
+      if(fast)
+      {
+        let newTime = current.getMinutes() + 15;
+        if(newTime > 60)
+        {
+          let newMinute = newTime - 60;
+          if(newMinute < 10)
+          {
+            time = (current.getHours() + 1) + ":0" + newMinute;
+          }
+          else
+          {
+            time = (current.getHours() + 1) + ":" + newMinute;
+          }
+        }
+        else
+        {
+          time = current.getHours() + ":" + newTime;
+        }
+      }
+      else
+      {
+        let newTime = current.getMinutes() + 35;
+        if(newTime > 60)
+        {
+          let newMinute = newTime - 60;
+          if(newMinute < 10)
+          {
+            time = (current.getHours() + 1) + ":0" + newMinute;
+          }
+          else
+          {
+            time = (current.getHours() + 1) + ":" + newMinute;
+          }
+        }
+        else
+        {
+          time = current.getHours() + ":" + newTime;
+        }
+      }
+
+      return date +' '+ time;
     }
   }
 });

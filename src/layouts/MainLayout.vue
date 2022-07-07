@@ -31,6 +31,8 @@
           <a href="#/login" class="q-pa-sm">Log In</a>
         </div>
         <div v-else style="display: flex;">
+          <a href="#/cart" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Cart</a>
+          <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
           <a href="#/profile" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
           <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
           <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
@@ -71,47 +73,20 @@ import {useRouter} from "vue-router";
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'Cart',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: '#/cart'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'Traking',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'History',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ]
 
 export default defineComponent({

@@ -77,7 +77,7 @@
             <div class="row">
               <div v-for="menu in menus"
                :key="menu.indexNbx">
-                  <card-comps :name-menu="menu.name" :id="menu.id" :price="menu.price" :details="menu.details"/>
+                  <card-comps :name-menu="menu.name" :idMenu="menu.id" :price="menu.price" :details="menu.details" :idRestau="id"/>
               </div>
             </div>
 
