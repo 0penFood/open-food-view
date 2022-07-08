@@ -118,7 +118,7 @@
 
       <q-item-section>
         <div class="q-mt-md text-right">
-          <q-btn label="Validate" color="primary"/>
+          <q-btn label="Validate" color="primary" @Click="validateCommande(element.id)" />
         </div>
       </q-item-section>
     </q-item>
@@ -167,7 +167,20 @@ export default defineComponent ({
           console.log(e);
           console.log("Nop!")
         });
-    }
+    },
+
+    //62bc1bb0c84ac2d0489a6486
+    async validateCommande(idCmd)
+    {
+      api.patch("commandes/"+idCmd , { state : 1}).then(() => {
+        console.log("Perfect update");
+        location.reload();
+      })
+        .catch((e) => {
+          console.log(e);
+          console.log("Nop!")
+        });
+    },
   },
 
 
