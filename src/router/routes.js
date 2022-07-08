@@ -25,6 +25,14 @@ const routes = [
       { path: '', component: () => import('pages/loginPage.vue') }
     ]
   },
+  {
+    path: '/menu',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'restaurants', component: () => import('pages/MenuRestau.vue') }
+    ]
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it
