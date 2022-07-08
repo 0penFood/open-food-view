@@ -72,9 +72,12 @@ import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { api } from "boot/axios";
-import { Cookies } from 'quasar'
+import { Cookies } from 'quasar';
+import { hashPassword } from '../js/hash';
+
 export default {
   name: "SignUpPage",
+
   setup () {
     const $q = useQuasar()
     const email = ref(null)
@@ -83,23 +86,25 @@ export default {
     const lastname = ref(null)
     const phone = ref(null)
     const router = useRouter()
+
     return {
       firstname,
       lastname,
       email,
       password,
       phone,
+
       onSubmit () {
         api.post('/users/delivery', {
           firstName: firstname.value,
           lastName: lastname.value,
           email: email.value,
-          password: password.value,
+          password:  hashPassword(password.value),
           phone: phone.value,
         })
           .then(() => {
             console.log("Account Create");
-            api.post('/auth/login', { email: email.value, password: password.value})
+            api.post('/auth/login', { email: email.value, password:  hashPassword(password.value)})
               .then((response) => {
                 Cookies.set('auth_token', response.data["access_token"])
                 Cookies.set('current_id', response.data["id"])
@@ -113,6 +118,7 @@ export default {
             console.log("Email already used");
           })
       },
+
       onReset () {
         email.value = null
         password.value = null
@@ -120,6 +126,7 @@ export default {
         lastname.value = null
         phone.value = null
       },
+
       triggerPositive(color, position, message)
       {
         $q.notify({

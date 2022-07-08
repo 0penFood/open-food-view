@@ -17,6 +17,14 @@ const routes = [
         component: () => import('pages/SignUpPage.vue')
       },
       {
+        path: '/profile',
+        component: () => import('pages/ProfilePage.vue')
+      },
+      {
+        path: '/partner',
+        component: () => import('pages/PartnerPage.vue')
+      },
+      {
         path: '/signup/delivery',
         component: () => import('pages/SignUpDeliveryPage.vue')
       },

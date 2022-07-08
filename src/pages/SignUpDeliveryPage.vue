@@ -4,7 +4,7 @@
     <div>
 
       <q-card square bordered class="q-pa-lg shadow-1">
-        <div class="text-h3"> Register Restaurant</div>
+        <div class="text-h3"> Register Delivery Society</div>
         <q-form
           @submit="onSubmit"
           @reset="onReset"
@@ -105,12 +105,15 @@ export default {
       onSubmit () {
         if (accept.value === true) {
 
-          api.post('/societies', {
+          let data = {
             societyAuth: authentificationSociety.value,
             societyName: name.value,
             sepa: sepa.value,
-            area: country.value + ";" + city.value + ";" + adresse.value,
-          })
+            //area: (country.value + ";" + city.value + ";" + adresse.value),
+          }
+
+          console.log(data);
+          api.post('/societies', data)
             .then((idsocietyDb) => {
               api.post('/users/society', {
                 fk_user: Cookies.get('current_id'),
@@ -118,13 +121,15 @@ export default {
               })
                 .then(() => {
                   console.log("Success");
-                  router.push({ path: '/' })
+                  location.replace();
                 })
-                .catch(() => {
+                .catch((e) => {
+                  console.log(e);
                   console.log("Error");
                 })
             })
-            .catch(() => {
+            .catch((e) => {
+              console.log(e);
               console.log("Error");
             })
         }

@@ -31,7 +31,7 @@
             <a href="#/login" class="q-pa-sm">Log In</a>
           </div>
           <div v-else style="display: flex;">
-            <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
+            <a href="#/profile" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
             <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
             <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
           </div>
@@ -86,25 +86,7 @@ const linksList = [
     title: 'PaternShip',
     caption: 'paternShip',
     icon: 'record_voice_over',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Help',
-    caption: 'chat help',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Add Restaurant',
-    caption: 'Go to website Restaurant',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Pass command with User',
-    caption: 'Go to website User',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    link: '#/partner'
   },
 ]
 
