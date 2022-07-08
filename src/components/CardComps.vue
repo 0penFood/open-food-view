@@ -82,7 +82,7 @@ export default defineComponent({
           timeDelivery: this.deliveryTime(false),
           state: 0,
           price: 5,
-          deliveryAddress: "test rue",
+          deliveryAddress: "?",
         }
 
 
@@ -99,6 +99,7 @@ export default defineComponent({
               }
             }
 
+            console.log(idCommand)
             for (const article of this.articles) {
 
               if(idCommand == "")

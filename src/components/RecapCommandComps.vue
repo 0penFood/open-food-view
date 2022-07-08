@@ -111,6 +111,20 @@
 
     <q-item v-if="this.typeRecap == 'check'">
       <q-item-section>
+        <q-input rounded standout label="Address" v-model="address"/>
+      </q-item-section>
+
+      <q-item-section>
+        <q-input rounded standout label="City" v-model="city"/>
+      </q-item-section>
+
+      <q-item-section>
+        <q-input rounded standout label="Country" v-model="country"/>
+      </q-item-section>
+    </q-item>
+
+    <q-item v-if="this.typeRecap == 'check'">
+      <q-item-section>
         <div class="q-mt-md text-left">
           <q-btn label="Delete" color="red" @Click="deleteCommandes(element.id)"/>
         </div>
@@ -140,6 +154,9 @@ export default defineComponent ({
   {
     return{
       elements: [],
+      address: "",
+      city: "",
+      country: ""
     }
   },
 
@@ -169,10 +186,11 @@ export default defineComponent ({
         });
     },
 
-    //62bc1bb0c84ac2d0489a6486
+
     async validateCommande(idCmd)
     {
-      api.patch("commandes/"+idCmd , { state : 1}).then(() => {
+      const address = this.address + ' ; ' + this.city + ' ; ' + this.country;
+      api.patch("commandes/"+idCmd , { state : 1, deliveryAddress: address}).then(() => {
         console.log("Perfect update");
         location.reload();
       })
@@ -198,14 +216,15 @@ export default defineComponent ({
       });
 
 
-    for (var i = 0; i < Object.keys(dataRtn).length; i++)
+    let size = Object.keys(dataRtn).length
+    for (var i = 0; i < size; i++)
     {
       switch (this.typeRecap){
         //Check if commande is start
         case "check":
           if(dataRtn[i].state != 0)
           {
-            dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           else {
             dataRtn[i]["nameRestau"] = await this.getNameRestaurant(dataRtn[i].idRestau);
@@ -216,7 +235,7 @@ export default defineComponent ({
         case "active":
           if(dataRtn[i].state == [0,99,-1])
           {
-            dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           else {
             dataRtn[i]["nameRestau"] = await this.getNameRestaurant(dataRtn[i].idRestau);
@@ -227,35 +246,15 @@ export default defineComponent ({
         case "finish":
           if(dataRtn[i].state != [99,-1])
           {
-            dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           else {
             dataRtn[i]["nameRestau"] = await this.getNameRestaurant(dataRtn[i].idRestau);
           }
           break;
-
-        default:
-          break;
       }
 
-      switch (dataRtn[i].state)
-      {
-        case 1:
-          dataRtn[i].state = "Pending";
-          break;
-        case 2:
-          dataRtn[i].state = "Accepted by Restaurant";
-          break;
-        case 3:
-          dataRtn[i].state = "Accepted by Delivery";
-          break;
-        case 4:
-          dataRtn[i].state = "Finish and give to Delivery man";
-          break;
-        case 5:
-          dataRtn[i].state = "Delivery";
-          break;
-      }
+
     }
     this.elements = dataRtn;
   }
