@@ -71,20 +71,17 @@ import {useRouter} from "vue-router";
 
 const linksList = [
   {
-    title: 'Orders',
-    caption: 'orders',
+    title: 'Traking',
     icon: 'code',
-    link: 'https://quasar.dev'
+    link: '#/traking'
   },
   {
     title: 'History',
-    caption: 'history',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: '#/history',
   },
   {
     title: 'PaternShip',
-    caption: 'paternShip',
     icon: 'record_voice_over',
     link: '#/partner'
   },

@@ -1,10 +1,10 @@
 <template>
   <q-page>
-    <p class="q-header text-center text-h2"> Missions ? </p>
+    <p class="q-header text-center text-h2"> History </p>
     <div class="row bg-white q-mt-sm">
       <div class="col-lg-7 col-md-5 col-sm-12 col-xs-12">
         <div class="q-pa-md">
-          <RecapCommandComps type-recap="check"></RecapCommandComps>
+          <RecapCommandComps type-recap="finish"></RecapCommandComps>
         </div>
       </div>
     </div>
@@ -12,13 +12,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { useRouter } from "vue-router";
-import { Cookies } from "quasar";
 import RecapCommandComps from "components/RecapCommandComps.vue";
-
-export default defineComponent({
-  name: 'IndexPage',
+import { Cookies } from "quasar";
+export default {
+  name: "HistoryPage",
   components: {
     RecapCommandComps
   },
@@ -31,7 +28,5 @@ export default defineComponent({
   {
     if(!this.isConnected) location.replace("#/login");
   },
-});
+};
 </script>
-
-

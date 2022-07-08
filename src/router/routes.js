@@ -25,6 +25,14 @@ const routes = [
         component: () => import('pages/PartnerPage.vue')
       },
       {
+        path: '/history',
+        component: () => import('pages/HistoryPage.vue')
+      },
+      {
+        path: '/traking',
+        component: () => import('pages/TrakingPage.vue')
+      },
+      {
         path: '/signup/delivery',
         component: () => import('pages/SignUpDeliveryPage.vue')
       },
