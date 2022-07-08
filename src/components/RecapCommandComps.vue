@@ -102,13 +102,13 @@
         </div>
       </q-item-section>
 
-      <q-item-section v-if="element.state == '1'">
+      <q-item-section v-if="element.state == 'Pending'">
         <div class="q-mt-md text-right">
           <q-btn label="Validate" color="primary" @Click="validateCommandes(element.id)"/>
         </div>
       </q-item-section>
 
-      <q-item-section v-if="element.state == '2' || element.state == '3'">
+      <q-item-section v-if="element.state == 'Accepted by Restaurant' || element.state == 'Accepted by Delivery'">
         <div class="q-mt-md text-right">
           <q-btn label="Finish and Send" color="primary" @Click="finishCommandes(element.id)"/>
         </div>
@@ -207,57 +207,62 @@ export default defineComponent ({
         console.log(e);
         console.log("Nop!")
       });
-    for (var i = 0; i < Object.keys(dataRtn).length; i++)
+
+    let size = Object.keys(dataRtn).length;
+    for (var i = 0; i < size; i++)
     {
       switch (this.typeRecap){
         //Check if commande is start
         case "check":
-          if(dataRtn[i].state != 1)
+          console.log(dataRtn[i].state)
+          if(dataRtn[i].state != 1 && dataRtn[i].state != 2 && dataRtn[i].state != 3)
           {
-            //dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           break;
         // Check if commande is active
         case "active":
-          if(dataRtn[i].state == [0,99,-1])
+          if(dataRtn[i].state != 4)
           {
-            dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           break;
         // Check if commande is finish
         case "finish":
           if(dataRtn[i].state != [99,-1])
           {
-            dataRtn.splice(i);
+            delete(dataRtn[i]);
           }
           break;
-        default:
-          break;
-      };
-
-      switch (dataRtn[i].state)
-      {
-        case 1:
-          dataRtn[i].state = "Pending";
-          break;
-
-        case 2:
-          dataRtn[i].state = "Accepted by Restaurant";
-          break;
-
-        case 3:
-          dataRtn[i].state = "Accepted by Delivery";
-          break;
-
-        case 4:
-          dataRtn[i].state = "Finish and give to Delivery man";
-          break;
-
-        case 5:
-          dataRtn[i].state = "Delivery";
-          break;
-
       }
+
+      if(dataRtn[i] != undefined)
+      {
+        switch (dataRtn[i].state)
+        {
+          case 1:
+            dataRtn[i].state = "Pending";
+            break;
+
+          case 2:
+            dataRtn[i].state = "Accepted by Restaurant";
+            break;
+
+          case 3:
+            dataRtn[i].state = "Accepted by Delivery";
+            break;
+
+          case 4:
+            dataRtn[i].state = "Finish and give to Delivery man";
+            break;
+
+          case 5:
+            dataRtn[i].state = "Delivery";
+            break;
+
+        }
+      }
+
     }
     this.elements = dataRtn;
   }
