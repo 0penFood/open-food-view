@@ -58,6 +58,7 @@ export default defineComponent({
     return{
       sponsors : [],
       emailPartners: "",
+      isConnected: Cookies.has('auth_token'),
     }
   },
 
@@ -71,23 +72,27 @@ export default defineComponent({
         isValid: true,
       }
 
-      await api.get("users/readByEmail/" + this.emailPartners)
-        .then(async (response) =>
-        {
-          dataPartner.partnerUser = response.data[0].idUser;
-        }).catch((e) => {
-          console.log(e)
-        });
+      if(!this.sponsors.includes(this.emailPartners))
+      {
+        await api.get("users/readByEmail/" + this.emailPartners)
+          .then(async (response) =>
+          {
+            dataPartner.partnerUser = response.data[0].idUser;
+          }).catch((e) => {
+            console.log(e)
+          });
 
 
-      await api.post("partnerships/users", dataPartner)
-        .then(async (response) => {
-          console.log("OK");
-        }).catch((e) => {
-          console.log(e)
-        });
+        await api.post("partnerships/users", dataPartner)
+          .then(async (response) => {
+            console.log("OK");
+          }).catch((e) => {
+            console.log(e)
+          });
 
-      await this.loadData();
+        await this.loadData();
+      }
+
     },
 
 
@@ -118,8 +123,15 @@ export default defineComponent({
 
   async created()
   {
-    await this.loadData();
-  }
+    if(!this.isConnected)
+    {
+      location.replace("#/login");
+    }
+    else{
+      await this.loadData();
+    }
+  },
+
 });
 </script>
 

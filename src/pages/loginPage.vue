@@ -31,10 +31,7 @@
           val => val !== null && val.length > 0 || 'Please type your password',]"
             />
             <div>
-              <a href="#/registration" style="color:orange">Sign Up</a>
-            </div>
-            <div>
-              <a href="#/registration" style="color:black">Profesionnal?</a>
+              <a href="#/signup" style="color:orange">Sign Up</a>
             </div>
 
             <div>

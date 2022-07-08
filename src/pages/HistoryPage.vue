@@ -12,11 +12,23 @@
 
 <script>
 import RecapCommandComps from "components/RecapCommandComps.vue";
+import { Cookies } from "quasar";
 
 export default {
   name: "HistoryPage",
   components: {
     RecapCommandComps
+  },
+
+  data(){
+    return{
+      isConnected: Cookies.has('auth_token'),
+    }
+  },
+
+  created()
+  {
+    if(!this.isConnected) location.replace("#/login");
   },
 };
 </script>
