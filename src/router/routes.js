@@ -33,6 +33,10 @@ const routes = [
         component: () => import('pages/HistoryPage.vue')
       },
       {
+        path: '/partner',
+        component: () => import('pages/PartnerPage.vue')
+      },
+      {
         path: '/details/:id',
         component: () => import('pages/DetailsPage.vue'),
         props: true,

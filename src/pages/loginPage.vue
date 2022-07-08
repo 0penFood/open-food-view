@@ -71,7 +71,6 @@ export default {
       onSubmit () {
         api.post('/auth/login', { email: email.value, password: hashPassword(password.value)})
           .then((response) => {
-            console.log(response.data);
             Cookies.set('auth_token', response.data["access_token"])
             Cookies.set('current_id', response.data["id"])
             router.push({ path: '/' })

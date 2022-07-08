@@ -87,6 +87,11 @@ const linksList = [
     icon: 'chat',
     link: '#/history'
   },
+  {
+    title: 'PartnerShip',
+    icon: 'people',
+    link: '#/partner'
+  },
 ]
 
 export default defineComponent({
