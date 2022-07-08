@@ -31,7 +31,7 @@
             <a href="#/login" class="q-pa-sm">Log In</a>
           </div>
           <div v-else style="display: flex;">
-            <a href="#" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
+            <a href="#/profile" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Profile</a>
             <p class="q-pa-sm" style="margin-bottom: auto; margin-top: auto"> | </p>
             <a href="#" @click="disconnect();" class="q-pa-sm" style="margin-bottom: auto; margin-top: auto">Disconnect</a>
           </div>
@@ -90,9 +90,8 @@ const linksList = [
   },
   {
     title: 'PaternShip',
-    caption: 'paternShip',
     icon: 'record_voice_over',
-    link: 'https://chat.quasar.dev'
+    link: '#/partner'
   },
   {
     title: 'Help',

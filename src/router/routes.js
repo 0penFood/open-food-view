@@ -13,16 +13,21 @@ const routes = [
         component: () => import('pages/SignUpPage.vue')
       },
       {
+        path: 'login',
+        component: () => import('pages/loginPage.vue')
+      },
+      {
+        path: 'profile',
+        component: () => import('pages/ProfilePage.vue')
+      },
+      {
+        path: 'partner',
+        component: () => import('pages/PartnerPage.vue')
+      },
+      {
         path: 'signup/restaurants',
         component: () => import('pages/RegistrationRestaurantPage.vue')
       }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/loginPage.vue') }
     ]
   },
 
