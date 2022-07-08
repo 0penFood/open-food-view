@@ -236,7 +236,26 @@ export default defineComponent ({
 
         default:
           break;
-      };
+      }
+
+      switch (dataRtn[i].state)
+      {
+        case 1:
+          dataRtn[i].state = "Pending";
+          break;
+        case 2:
+          dataRtn[i].state = "Accepted by Restaurant";
+          break;
+        case 3:
+          dataRtn[i].state = "Accepted by Delivery";
+          break;
+        case 4:
+          dataRtn[i].state = "Finish and give to Delivery man";
+          break;
+        case 5:
+          dataRtn[i].state = "Delivery";
+          break;
+      }
     }
     this.elements = dataRtn;
   }
