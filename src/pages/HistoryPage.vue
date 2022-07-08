@@ -3,7 +3,7 @@
     <div class="row bg-white q-mt-sm">
       <div class="col-lg-7 col-md-5 col-sm-12 col-xs-12">
         <div class="q-pa-md">
-          <RecapCommandComps type-recap="check"></RecapCommandComps>
+          <RecapCommandComps type-recap="finish"></RecapCommandComps>
         </div>
       </div>
     </div>
@@ -14,11 +14,13 @@
 import RecapCommandComps from "components/RecapCommandComps.vue";
 
 export default {
-  name: "CartPage",
-
+  name: "HistoryPage",
   components: {
     RecapCommandComps
   },
-
 };
 </script>
+
+<style scoped>
+
+</style>

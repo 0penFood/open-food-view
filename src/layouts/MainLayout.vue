@@ -80,12 +80,12 @@ const linksList = [
   {
     title: 'Traking',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: '#/traking'
   },
   {
     title: 'History',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    link: '#/history'
   },
 ]
 
