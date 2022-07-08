@@ -11,10 +11,10 @@
             thumbnails
             infinite
           >
-            <q-carousel-slide :name="1" img-src="https://img.freepik.com/photos-gratuite/pates-penne-sauce-tomate-au-poulet-tomates-table-bois_2829-19739.jpg?t=st=1656657684~exp=1656658284~hmac=df29d8b91e5bb4ca5967c2ec6c7532d29580e08f0d008680d00da7f82be05fc2&w=996"/>
-            <q-carousel-slide :name="2" img-src="https://img.freepik.com/photos-gratuite/pizza-pizza-remplie-tomates-salami-olives_140725-1200.jpg?t=st=1656657708~exp=1656658308~hmac=497ca03af71a86909a6bf385582919b673579556d300403fe5486b3dd14231c1&w=740"/>
-            <q-carousel-slide :name="3" img-src="https://img.freepik.com/photos-gratuite/salade-fraiche-dinde-aux-oeufs-aux-legumes_1220-5193.jpg?t=st=1656657757~exp=1656658357~hmac=ce0d5bfe270ba39775d207424d2b49b7cc5d54eb11d8a601e15029c0d284d9e3&w=996"/>
-            <q-carousel-slide :name="4" img-src="https://img.freepik.com/photos-gratuite/plat-gnocchi-cuisine-alpine-italienne-sud-allemande-autrichienne_661608-208.jpg?w=996"/>
+            <q-carousel-slide :name="1" img-src="https://th.bing.com/th/id/R.782c60d92143e17372fff49eee2903b8?rik=JxVqsKKxnNVC3g&riu=http%3a%2f%2fkooltronic.com%2fimages%2fimage-not-found.png&ehk=DBnfbTFEgvgoCZXl30O3ks9T%2bPGsLLbIu%2bktdioJjsA%3d&risl=&pid=ImgRaw&r=0"/>
+            <q-carousel-slide :name="2" img-src="https://cdn.xxl.thumbs.canstockphoto.com/server-message-error-404-on-a-black-background-3d-rendering-computer-generated-text-about-the-drawings_csp81442638.jpg"/>
+            <q-carousel-slide :name="3" img-src="https://th.bing.com/th/id/OIP.6Fw3I4GTendpiVGQKVoxbAAAAA?pid=ImgDet&rs=1"/>
+            <q-carousel-slide :name="4" img-src="https://th.bing.com/th/id/R.f6945000d1927530311c28bc9e831a22?rik=hXt3NjtmlDQCkQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-PUVo2mk7fjM%2fTjAWtxjXriI%2fAAAAAAAABP4%2f6Jr7S-angaE%2fs1600%2f404-desktop-not-found-wallpaper.jpg&ehk=q1bg%2b8mMmuSWU5t60TG7HrAOEwQD7zV0lfimj69Dl%2fU%3d&risl=&pid=ImgRaw&r=0"/>
           </q-carousel>
 
 
