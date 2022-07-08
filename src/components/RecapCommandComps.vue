@@ -13,31 +13,17 @@
     <q-item>
       <q-item-section>
         <q-item-label class="text-grey-10">
-          Name Restaurant
+          ID Commande
         </q-item-label>
       </q-item-section>
 
       <q-item-section>
         <q-item-label class="text-grey-10">
-          {{ element.nameRestau }}
+          {{ element.id }}
         </q-item-label>
       </q-item-section>
     </q-item>
 
-
-    <q-item>
-      <q-item-section>
-        <q-item-label class="text-grey-10">
-          Delivery Address
-        </q-item-label>
-      </q-item-section>
-
-      <q-item-section>
-        <q-item-label class="text-grey-10">
-          {{ element.deliveryAddress }}
-        </q-item-label>
-      </q-item-section>
-    </q-item>
 
     <q-item>
       <q-item-section>
@@ -70,7 +56,7 @@
 
 
 
-    <q-item v-if="this.typeRecap == 'active'">
+    <q-item>
       <q-item-section>
         <q-item-label class="text-grey-10">
           State
@@ -112,13 +98,19 @@
     <q-item v-if="this.typeRecap == 'check'">
       <q-item-section>
         <div class="q-mt-md text-left">
-          <q-btn label="Delete" color="red" @Click="deleteCommandes(element.id)"/>
+          <q-btn label="Decline" color="red" @Click="deleteCommandes(element.id)"/>
         </div>
       </q-item-section>
 
-      <q-item-section>
+      <q-item-section v-if="element.state == '1'">
         <div class="q-mt-md text-right">
-          <q-btn label="Validate" color="primary"/>
+          <q-btn label="Validate" color="primary" @Click="validateCommandes(element.id)"/>
+        </div>
+      </q-item-section>
+
+      <q-item-section v-if="element.state == '2' || element.state == '3'">
+        <div class="q-mt-md text-right">
+          <q-btn label="Finish and Send" color="primary" @Click="finishCommandes(element.id)"/>
         </div>
       </q-item-section>
     </q-item>
@@ -141,18 +133,6 @@ export default defineComponent ({
     }
   },
   methods:{
-    async getNameRestaurant(id)
-    {
-      return await api.get("societies/"+ id +"/restau/partial")
-        .then((response) =>
-        {
-          return response.data[0].societyName;
-        })
-        .catch((e) => {
-          console.log(e);
-          console.log("Nop!")
-        });
-    },
     async deleteCommandes(idCmd)
     {
       api.delete("commandes/"+idCmd).then(() => {
@@ -163,8 +143,38 @@ export default defineComponent ({
           console.log(e);
           console.log("Nop!")
         });
+    },
+    async validateCommandes(idCmd)
+    {
+      api.patch("commandes/"+idCmd, { state : 2 })
+        .then(() => {
+        console.log("Perfect Update!");
+        location.reload();
+      })
+        .catch((e) =>
+        {
+          console.log(e);
+          console.log("Nop!")
+        });
+    },
+
+    async finishCommandes(idCmd)
+    {
+      api.patch("commandes/"+idCmd, { state : 4 })
+        .then(() => {
+          console.log("Perfect Update!");
+          location.reload();
+        })
+        .catch((e) =>
+        {
+          console.log(e);
+          console.log("Nop!")
+        });
     }
   },
+
+
+
   async created()
   {
     let dataRtn = [{}];
@@ -202,9 +212,9 @@ export default defineComponent ({
       switch (this.typeRecap){
         //Check if commande is start
         case "check":
-          if(dataRtn[i].state != 0)
+          if(dataRtn[i].state != 1)
           {
-            dataRtn.splice(i);
+            //dataRtn.splice(i);
           }
           break;
         // Check if commande is active
@@ -224,6 +234,30 @@ export default defineComponent ({
         default:
           break;
       };
+
+      switch (dataRtn[i].state)
+      {
+        case 1:
+          dataRtn[i].state = "Pending";
+          break;
+
+        case 2:
+          dataRtn[i].state = "Accepted by Restaurant";
+          break;
+
+        case 3:
+          dataRtn[i].state = "Accepted by Delivery";
+          break;
+
+        case 4:
+          dataRtn[i].state = "Finish and give to Delivery man";
+          break;
+
+        case 5:
+          dataRtn[i].state = "Delivery";
+          break;
+
+      }
     }
     this.elements = dataRtn;
   }

@@ -68,7 +68,8 @@ export default {
       onSubmit () {
         api.post('/auth/login', { email: email.value, password: hashPassword(password.value)})
           .then((response) => {
-            Cookies.set('auth_token', response.data)
+            Cookies.set('auth_token', response.data);
+            Cookies.set('current_id', response.data["id"]);
             router.push({ path: '/' })
         })
           .catch(() => {
