@@ -25,6 +25,18 @@ const routes = [
         component: () => import('pages/PartnerPage.vue')
       },
       {
+        path: 'orders',
+        component: () => import('pages/OrdersPage.vue')
+      },
+      {
+        path: 'traking',
+        component: () => import('pages/TrakingPage.vue')
+      },
+      {
+        path: 'history',
+        component: () => import('pages/HistoryPage.vue')
+      },
+      {
         path: 'signup/restaurants',
         component: () => import('pages/RegistrationRestaurantPage.vue')
       }

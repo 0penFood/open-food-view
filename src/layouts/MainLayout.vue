@@ -80,36 +80,22 @@ const linksList = [
     title: 'Orders',
     caption: 'orders',
     icon: 'code',
-    link: 'https://quasar.dev'
+    link: '#/orders'
+  },
+  {
+    title: 'Trakings',
+    icon: 'code',
+    link: '#/traking'
   },
   {
     title: 'History',
-    caption: 'history',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: '#/history'
   },
   {
     title: 'PaternShip',
     icon: 'record_voice_over',
     link: '#/partner'
-  },
-  {
-    title: 'Help',
-    caption: 'chat help',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Add Deliver Man',
-    caption: 'Go to website Deliver',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Pass command with User',
-    caption: 'Go to website User',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
   },
 ]
 
