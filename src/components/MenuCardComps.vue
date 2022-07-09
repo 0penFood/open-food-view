@@ -15,7 +15,7 @@
           icon="delete"
           @click="deleteMenu(menuId)"
         />
-        <q-btn flat round color="blue" icon="edit" />
+        <q-btn flat round color="blue" icon="" />
         <q-btn
           flat
           round
