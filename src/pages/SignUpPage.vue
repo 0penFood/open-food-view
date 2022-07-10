@@ -91,7 +91,6 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { api } from "boot/axios";
 import { Cookies } from "quasar";
-import { getRestauForLogin } from "../js/getCurrentRestauforLogin";
 import { hashPassword } from "../js/hash";
 
 export default {
@@ -132,10 +131,6 @@ export default {
               .then(async (response) => {
                 Cookies.set("auth_token", response.data["access_token"]);
                 Cookies.set("current_id", response.data["id"]);
-                Cookies.set(
-                  "restau_id",
-                  await getRestauForLogin(response.data["id"])
-                );
                 router.push({ path: "/signup/restaurants" });
               })
               .catch(() => {

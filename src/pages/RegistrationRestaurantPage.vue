@@ -101,6 +101,7 @@ import { ref } from "vue";
 import { Cookies } from "quasar";
 import { api } from "boot/axios";
 import { useRouter } from "vue-router";
+import { getRestauForLogin } from "../js/getCurrentRestauforLogin";
 
 export default {
   name: "RegistrationRestaurantPage",
@@ -152,8 +153,12 @@ export default {
                       fk_user: Cookies.get("current_id"),
                       fk_society: idSocietyDb.data.id,
                     })
-                    .then(() => {
+                    .then(async () => {
                       console.log("Success");
+                      Cookies.set(
+                        "restau_id",
+                        await getRestauForLogin(Cookies.get("current_id"))
+                      );
                       router.push({ path: "/" });
                     })
                     .catch(() => {
