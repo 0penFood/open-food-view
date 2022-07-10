@@ -63,7 +63,7 @@
 
       <q-item-section>
         <q-item-label class="text-grey-10">
-          {{ element.price}}
+          {{ element.price}} €
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -79,7 +79,7 @@
 
       <q-item-section>
         <q-item-label class="text-grey-10">
-          {{ element.state}}
+          {{ element.stateName }}
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -255,6 +255,27 @@ export default defineComponent ({
       }
 
 
+      if(dataRtn[i] != undefined)
+      {
+        switch (dataRtn[i].state)
+        {
+          case 1:
+            dataRtn[i].stateName = "Pending";
+            break;
+          case 2:
+            dataRtn[i].stateName = "Accepted by Restaurant";
+            break;
+          case 3:
+            dataRtn[i].stateName = "Accepted by Delivery";
+            break;
+          case 4:
+            dataRtn[i].stateName = "Finish and give to Delivery man";
+            break;
+          case 99:
+            dataRtn[i].stateName = "Delivery";
+            break;
+        }
+      }
     }
     this.elements = dataRtn;
   }

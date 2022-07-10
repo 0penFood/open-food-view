@@ -36,7 +36,7 @@
       </q-list>
 
     </div>
-    <q-btn class="q-mt-md" color="orange-9" icon="shopping_cart" label="Add" @Click="addToCart();" type="button"/>
+    <q-btn class="q-mt-md" color="orange-9" icon="shopping_cart" label="Add" @Click="addToCart(price);" type="button"/>
   </div>
 
 </template>
@@ -73,7 +73,7 @@ export default defineComponent({
 
 
   methods:{
-    addToCart(){
+    addToCart(price){
       if(this.isConnected)
       {
         let dataCommandes={
@@ -81,7 +81,7 @@ export default defineComponent({
           idRestau: this.idRestau,
           timeDelivery: this.deliveryTime(false),
           state: 0,
-          price: 5,
+          price: price,
           deliveryAddress: "?",
         }
 
@@ -95,11 +95,11 @@ export default defineComponent({
               if(response.data[i].state == 0 && response.data[i].idRestau == this.idRestau)
               {
                 idCommand = response.data[i].id;
+                dataCommandes.price = response.data[i].price + price;
                 break;
               }
             }
 
-            console.log(idCommand)
             for (const article of this.articles) {
 
               if(idCommand == "")
@@ -108,6 +108,17 @@ export default defineComponent({
                   .then((response) => {
                     idCommand = response.data.id;
                     console.log("Perfect, I create commande with the restaurants!");
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                    console.log("Nop!")
+                  });
+              }
+              else{
+
+                await api.patch("commandes/" + idCommand, dataCommandes)
+                  .then(() => {
+                    console.log("Perfect, I update price commande with the restaurants!");
                   })
                   .catch((e) => {
                     console.log(e);
