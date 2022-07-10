@@ -49,7 +49,7 @@
 
       <q-item-section>
         <q-item-label class="text-grey-10">
-          {{ element.price}}
+          {{ element.price}} €
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -65,7 +65,7 @@
 
       <q-item-section>
         <q-item-label class="text-grey-10">
-          {{ element.state}}
+          {{ element.statName}}
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -102,13 +102,13 @@
         </div>
       </q-item-section>
 
-      <q-item-section v-if="element.state == 'Pending'">
+      <q-item-section v-if="element.state == '1'">
         <div class="q-mt-md text-right">
           <q-btn label="Validate" color="primary" @Click="validateCommandes(element.id)"/>
         </div>
       </q-item-section>
 
-      <q-item-section v-if="element.state == 'Accepted by Restaurant' || element.state == 'Accepted by Delivery'">
+      <q-item-section v-if="element.state == '2' || element.state == '3'">
         <div class="q-mt-md text-right">
           <q-btn label="Finish and Send" color="primary" @Click="finishCommandes(element.id)"/>
         </div>
@@ -229,8 +229,9 @@ export default defineComponent ({
           break;
         // Check if commande is finish
         case "finish":
-          if(dataRtn[i].state != [99,-1])
+          if(dataRtn[i].state != 99 && dataRtn[i].state != -1)
           {
+            console.log(dataRtn[i])
             delete(dataRtn[i]);
           }
           break;
@@ -241,23 +242,23 @@ export default defineComponent ({
         switch (dataRtn[i].state)
         {
           case 1:
-            dataRtn[i].state = "Pending";
+            dataRtn[i].statName = "Pending";
             break;
 
           case 2:
-            dataRtn[i].state = "Accepted by Restaurant";
+            dataRtn[i].statName = "Accepted by Restaurant";
             break;
 
           case 3:
-            dataRtn[i].state = "Accepted by Delivery";
+            dataRtn[i].statName = "Accepted by Delivery";
             break;
 
           case 4:
-            dataRtn[i].state = "Finish and give to Delivery man";
+            dataRtn[i].statName = "Finish and give to Delivery man";
             break;
 
-          case 5:
-            dataRtn[i].state = "Delivery";
+          case 99:
+            dataRtn[i].statName = "Delivery";
             break;
 
         }
