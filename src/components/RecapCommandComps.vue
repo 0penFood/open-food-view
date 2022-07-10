@@ -225,7 +225,7 @@ export default defineComponent ({
     }
     else
     {
-      dataRtn = await api.get("commandes/delivery/" + Cookies.get('current_id'))
+      dataRtn = await api.get("commandes")
         .then((response) => {
           return response.data;
         })
@@ -251,7 +251,7 @@ export default defineComponent ({
           break;
         // Check if commande is active
         case "active":
-          if(dataRtn[i].state != 4)
+          if(dataRtn[i].state != 4 && dataRtn[i].state != 3)
           {
             delete(dataRtn[i]);
           }
@@ -261,7 +261,7 @@ export default defineComponent ({
           break;
         // Check if commande is finish
         case "finish":
-          if(dataRtn[i].state != [99,-1])
+          if(dataRtn[i].state != 99 && dataRtn[i].state != -1)
           {
             delete(dataRtn[i]);
           }
