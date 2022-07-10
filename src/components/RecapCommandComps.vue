@@ -70,7 +70,7 @@
 
 
 
-    <q-item v-if="this.typeRecap == 'active'">
+    <q-item v-if="this.typeRecap == 'active' || this.typeRecap == 'finish' ">
       <q-item-section>
         <q-item-label class="text-grey-10">
           State
@@ -233,7 +233,7 @@ export default defineComponent ({
 
         // Check if commande is active
         case "active":
-          if(dataRtn[i].state == [0,99,-1])
+          if(dataRtn[i].state == 0 || dataRtn[i].state == 99 ||  dataRtn[i].state == -1)
           {
             delete(dataRtn[i]);
           }
@@ -244,7 +244,7 @@ export default defineComponent ({
 
         // Check if commande is finish
         case "finish":
-          if(dataRtn[i].state != [99,-1])
+          if(dataRtn[i].state != 99 &&  dataRtn[i].state != -1)
           {
             delete(dataRtn[i]);
           }
