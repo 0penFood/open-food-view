@@ -64,6 +64,42 @@
               label="Estimate preparation time"
               lazy-rules
             />
+            <p class="q-mt-lg" style="font-size: 2em">Article</p>
+            <q-input
+              rounded
+              filled
+              v-model="articleName"
+              type="text"
+              label="Article name"
+              lazy-rules
+            />
+            <q-input
+              class="q-mt-lg"
+              rounded
+              filled
+              v-model="articleTime"
+              type="number"
+              label="Article time preparation"
+              lazy-rules
+            />
+            <q-input
+              class="q-mt-lg"
+              rounded
+              filled
+              v-model="articlePrice"
+              type="number"
+              label="Article price"
+              lazy-rules
+            />
+            <q-input
+              class="q-mt-lg"
+              rounded
+              filled
+              v-model="articleQuantity"
+              type="number"
+              label="Article quantity"
+              lazy-rules
+            />
           </q-card-section>
           <q-card-actions align="right">
             <q-btn label="Submit" type="submit" color="primary" />
@@ -93,6 +129,10 @@ export default defineComponent({
       newMenuDesc: "",
       newMenuPrice: 0,
       newMenuTime: 0,
+      articleName: "",
+      articleTime: 0,
+      articlePrice: 0,
+      articleQuantity: 0,
     };
   },
 
@@ -105,10 +145,23 @@ export default defineComponent({
         timePreparedDef: this.newMenuTime,
       };
 
+      let articleData = {
+        name: this.articleName,
+        timePreparedDef: this.articleTime,
+        price: this.articlePrice,
+        quantity: this.articleQuantity,
+      };
+
       await api
         .post("restaurants/" + Cookies.get("restau_id") + "/menus", newMenuData)
-        .then(() => {
-          location.reload();
+        .then(async (response) => {
+          articleData.containerId = response.data.id;
+          await api
+            .post("restaurants/menu/" + response.data.id, articleData)
+            .then(location.reload)
+            .catch((e) => {
+              console.log(e);
+            });
         })
         .catch((e) => {
           console.log(e);
