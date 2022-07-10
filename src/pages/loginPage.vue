@@ -55,11 +55,12 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
-import { ref } from "vue";
-import { api } from "boot/axios";
-import { Cookies } from "quasar";
-import { useRouter } from "vue-router";
+import { useQuasar } from 'quasar'
+import { ref } from 'vue'
+import { api } from 'boot/axios'
+import { Cookies } from 'quasar'
+import { useRouter } from 'vue-router'
+import { hashPassword } from "src/js/hash";
 import { getRestauForLogin } from "../js/getCurrentRestauforLogin";
 
 export default {
@@ -72,6 +73,7 @@ export default {
     return {
       email,
       password,
+
 
       onSubmit() {
         api

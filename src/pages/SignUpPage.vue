@@ -73,7 +73,8 @@ import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { api } from "boot/axios";
-import { Cookies } from 'quasar'
+import { Cookies } from 'quasar';
+import { hashPassword } from '../js/hash';
 
 export default {
   name: "SignUpPage",
@@ -99,12 +100,12 @@ export default {
           firstName: firstname.value,
           lastName: lastname.value,
           email: email.value,
-          password: password.value,
+          password: hashPassword(password.value),
           phone: phone.value,
         })
           .then(() => {
             console.log("Account Create");
-            api.post('/auth/login', { email: email.value, password: password.value})
+            api.post('/auth/login', { email: email.value, password: hashPassword(password.value)})
               .then((response) => {
                 Cookies.set('auth_token', response.data["access_token"])
                 Cookies.set('current_id', response.data["id"])
