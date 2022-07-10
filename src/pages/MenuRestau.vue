@@ -155,10 +155,11 @@ export default defineComponent({
       await api
         .post("restaurants/" + Cookies.get("restau_id") + "/menus", newMenuData)
         .then(async (response) => {
-          articleData.containerId = response.data.id;
           await api
             .post("restaurants/menu/" + response.data.id, articleData)
-            .then(location.reload)
+            .then(() => {
+              location.reload();
+            })
             .catch((e) => {
               console.log(e);
             });

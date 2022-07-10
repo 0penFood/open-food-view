@@ -101,8 +101,10 @@ export default defineComponent({
 
   methods: {
     async deleteMenu(idMenu) {
-      await api.delete("restaurants/menu/" + idMenu).then((reponse) => {
-        location.reload();
+      await api.delete("restaurants/" + idMenu + "/articles").then(async () => {
+        await api.delete("restaurants/menu/" + idMenu).then((reponse) => {
+          location.reload();
+        });
       });
     },
   },
