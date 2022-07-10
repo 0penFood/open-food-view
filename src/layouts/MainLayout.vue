@@ -74,7 +74,7 @@ const linksList = [
     title: 'Menus',
     caption: 'menus',
     icon: 'code',
-    link: 'https://quasar.dev'
+    link: '#/menu/restaurants'
   },
   {
     title: 'Orders',
