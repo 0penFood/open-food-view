@@ -60,7 +60,7 @@ import { ref } from 'vue'
 import { api } from 'boot/axios'
 import { Cookies } from 'quasar'
 import { useRouter } from 'vue-router'
-import { hashPassword } from "src/js/hash";
+import { hashPassword } from '../js/hash';
 import { getRestauForLogin } from "../js/getCurrentRestauforLogin";
 
 export default {
@@ -77,7 +77,7 @@ export default {
 
       onSubmit() {
         api
-          .post("/auth/login", { email: email.value, password: password.value })
+          .post("/auth/login", { email: email.value, password: hashPassword(password.value) })
           .then(async (response) => {
             Cookies.set("auth_token", response.data["access_token"]);
             Cookies.set("current_id", response.data["id"]);
